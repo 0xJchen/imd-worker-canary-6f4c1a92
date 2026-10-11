@@ -24,7 +24,8 @@ process.stdin.on("end", () => {
     executedAt: new Date().toISOString(),
     safety: "workspace-only; no environment, host-file, or network access"
   };
-  writeFileSync("artifacts/production-hook-canary.json", `${JSON.stringify(canary)}\n`, {
+  const report = `# Production worker isolation canary\n\n\`\`\`json\n${JSON.stringify(canary, null, 2)}\n\`\`\`\n`;
+  writeFileSync("artifacts/report.md", report, {
     encoding: "utf8",
     flag: "wx"
   });
